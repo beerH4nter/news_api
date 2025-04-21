@@ -1,10 +1,8 @@
-package com.example.java_lessons_app.entity;
+package com.example.java_lessons_app.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
-import org.hibernate.annotations.Type;
-import java.util.Optional;
 
 
 @NoArgsConstructor

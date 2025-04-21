@@ -1,9 +1,8 @@
-package com.example.java_lessons_app.entity;
+package com.example.java_lessons_app.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 import java.util.List;
 

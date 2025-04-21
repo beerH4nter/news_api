@@ -1,4 +1,4 @@
-package com.example.java_lessons_app.config;
+package com.example.java_lessons_app.security;
 
 import com.example.java_lessons_app.repositories.UsersRepository;
 import lombok.RequiredArgsConstructor;

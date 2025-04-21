@@ -1,6 +1,7 @@
-package com.example.java_lessons_app.entity;
+package com.example.java_lessons_app.entities;
 
 
+import com.example.java_lessons_app.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
@@ -49,8 +50,9 @@ public class User implements UserDetails, Principal {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("USER"));
+        return List.of(new SimpleGrantedAuthority("ROLE_" + role.name()));
     }
+
 
     @Override
     public String getUsername() {
