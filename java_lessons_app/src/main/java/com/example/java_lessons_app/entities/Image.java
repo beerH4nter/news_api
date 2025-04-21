@@ -1,26 +1,29 @@
 package com.example.java_lessons_app.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
-import org.hibernate.validator.constraints.ISBN;
+import org.hibernate.annotations.Type;
+import java.util.Optional;
 
-@Entity
-@Getter
-@Setter
-@AllArgsConstructor
+
 @NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Data
 @Table(name = "images")
 @ToString
+@Builder
 public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Lob  // Используем @Lob для хранения больших данных
-    @Column(columnDefinition = "BYTEA")
-    private byte[] image;
+    @NotEmpty(message = "Image path can not be empty")
+    private String image;
 
     @ManyToOne
     @JoinColumn(name = "news_id", nullable = false)
     private News news;
+
 }
