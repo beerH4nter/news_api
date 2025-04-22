@@ -49,8 +49,7 @@ public class ImageController {
         Path fullPath = Paths.get(dirPath + path);
         return ResponseEntity.ok(Files.readAllBytes(fullPath));
     }
-
-
+    
     @PostMapping
     public void add(@RequestBody ImageAddDTO imageAddDTO) throws IOException {
         service.add(imageAddDTO);

@@ -15,7 +15,7 @@ const MainPage = () => {
                     data.map(async (news) => {
                         const firstImagePath = news.imagePathList[0];
                         if (firstImagePath) {
-                            return { ...news, img: firstImagePath};
+                            return { ...news, img: firstImagePath };
                         }
                         return { ...news, img: null };
                     })

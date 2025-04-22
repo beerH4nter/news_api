@@ -7,14 +7,12 @@ const API_URL = "http://localhost:8080";
 const NewsDetailPage = () => {
     const { id } = useParams();
     const [news, setNews] = useState(null);
-    const [images, setImages] = useState([]);
 
     useEffect(() => {
         fetch(`${API_URL}/news/${id}`)
             .then((res) => res.json())
             .then((data) => {
                 setNews(data);
-                Promise.all(data.imagePathList.map((imgPath) => fetch(`${API_URL}/image/${imgPath}`).then((res) => res.json()))).then(setImages);
             });
     }, [id]);
 
@@ -30,11 +28,9 @@ const NewsDetailPage = () => {
                 <strong>Описание:</strong> {news.description}
             </p>
             <p>{news.text}</p>
-            {images.map((img) => (
-                <div className="main-page_img-container">
-                    <img key={img.id} src={API_URL + img.image} alt="news" style={{ maxWidth: "100%" }} />
-                </div>
-            ))}
+            <div className="main-page_img-container">
+                <img src={`${API_URL}/image/${news.imagePathList[0]}`} alt="news" style={{ maxWidth: "100%" }} />
+            </div>
         </div>
     );
 };
