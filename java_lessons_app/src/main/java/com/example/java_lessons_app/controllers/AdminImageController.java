@@ -27,12 +27,12 @@ public class AdminImageController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Image> getImage(@PathVariable Long id) {
+    public ResponseEntity<String> getImage(@PathVariable Long id) {
         return ResponseEntity.ok(service.getById(id));
     }
 
     @GetMapping("/news/{newsId}")
-    public ResponseEntity<List<Image>> findByNewsId(@PathVariable Long newsId) {
+    public ResponseEntity<List<Long>> findByNewsId(@PathVariable Long newsId) {
         return ResponseEntity.ok(service.findByNews(newsId));
     }
 

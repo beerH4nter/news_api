@@ -18,7 +18,7 @@ public class Image {
     private Long id;
 
     @NotEmpty(message = "Image path can not be empty")
-    private String image;
+    private String imagePath;
 
     @ManyToOne
     @JoinColumn(name = "news_id", nullable = false)

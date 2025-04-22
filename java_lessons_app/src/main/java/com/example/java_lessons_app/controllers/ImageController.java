@@ -9,6 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,17 +31,25 @@ public class ImageController {
         return ResponseEntity.ok(service.getAll());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Image> getImage(@PathVariable Long id){
-        return ResponseEntity.ok(service.getById(id));
-    }
+//    @GetMapping("/{id}")
+//    public ResponseEntity<String> getImagePath(@PathVariable Long id){
+//        return ResponseEntity.ok(service.getById(id));
+//    }
 
     @GetMapping("/findByNews/{newsId}")
-    public ResponseEntity<List<Image>> findByNewsId(@PathVariable Long newsId){
+    public ResponseEntity<List<Long>> findByNewsId(@PathVariable Long newsId){
         return ResponseEntity.ok(
                 service.findByNews(newsId)
         );
     }
+
+    @GetMapping("/{path}")
+    ResponseEntity<byte[]> getImage(@PathVariable String path) throws IOException {
+        String dirPath = "src/main/resources/static/images/";
+        Path fullPath = Paths.get(dirPath + path);
+        return ResponseEntity.ok(Files.readAllBytes(fullPath));
+    }
+
 
     @PostMapping
     public void add(@RequestBody ImageAddDTO imageAddDTO) throws IOException {

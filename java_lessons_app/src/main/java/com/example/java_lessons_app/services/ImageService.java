@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ImageService {
@@ -27,7 +28,7 @@ public class ImageService {
     private Image mapToEntity(ImageAddDTO imageAddDTO){
 
         return Image.builder()
-                .image(imageAddDTO.getImage())
+                .imagePath(imageAddDTO.getImage())
                 .news(newsRepository.findById(imageAddDTO.getNewsId()).orElseThrow(EntityNotFoundException::new))
                 .build();
 
@@ -49,13 +50,14 @@ public class ImageService {
         return imageOptional;
     }
 
-    public Image getById(Long id) {
+    public String getById(Long id) {
         return imagesRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Image with id " + id + " not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Image with id " + id + " not found"))
+                .getImagePath();
     }
 
-    public List<Image> findByNews(Long newsId){
-        return imagesRepository.findAllByNewsId(newsId);
+    public List<Long> findByNews(Long newsId){
+        return imagesRepository.findImageListByNewsId(newsId).stream().map(Image::getId).collect(Collectors.toList());
     }
 
     public Optional<Image> update(Image image, Long id) throws IOException {

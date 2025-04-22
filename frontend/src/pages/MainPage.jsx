@@ -13,12 +13,11 @@ const MainPage = () => {
             .then(async (data) => {
                 const enriched = await Promise.all(
                     data.map(async (news) => {
-                        const firstImageId = news.imageIdList[0];
-                        if (firstImageId) {
-                            const img = await fetch(`${API_URL}/image/${firstImageId}`).then((r) => r.json());
-                            return { ...news, imagePath: img.image };
+                        const firstImagePath = news.imagePathList[0];
+                        if (firstImagePath) {
+                            return { ...news, img: firstImagePath};
                         }
-                        return { ...news, imagePath: null };
+                        return { ...news, img: null };
                     })
                 );
                 setNewsList(enriched);
@@ -29,10 +28,10 @@ const MainPage = () => {
         <div className="main-page">
             {newsList.map((news) => (
                 <div key={news.id} className="news-card">
-                    {news.imagePath && (
+                    {news.img && (
                         <>
                             <div className="main-page_img-container">
-                                <img src={API_URL + news.imagePath} alt="news" />
+                                <img src={`${API_URL}/image/${news.img}`} alt="news" />
                             </div>
                         </>
                     )}

@@ -14,5 +14,5 @@ public class NewsDTO {
     private String text;
     private String date;
     private Long userId;
-    private List<Long> imageIdList;
+    private List<String> imagePathList; //TODO: переписать под path
 }

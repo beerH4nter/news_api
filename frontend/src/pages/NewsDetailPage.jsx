@@ -14,7 +14,7 @@ const NewsDetailPage = () => {
             .then((res) => res.json())
             .then((data) => {
                 setNews(data);
-                Promise.all(data.imageIdList.map((imgId) => fetch(`${API_URL}/images/${imgId}`).then((res) => res.json()))).then(setImages);
+                Promise.all(data.imagePathList.map((imgPath) => fetch(`${API_URL}/image/${imgPath}`).then((res) => res.json()))).then(setImages);
             });
     }, [id]);
 

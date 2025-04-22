@@ -35,7 +35,7 @@ public class NewsService {
                 .text(news.getText())
                 .date(news.getDate())
                 .userId(news.getUser().getId())
-                .imageIdList(news.getImages().stream().map(Image::getId).collect(Collectors.toList()))
+                .imagePathList(news.getImages().stream().map(Image::getImagePath).collect(Collectors.toList()))
                 .build();
 
     }
